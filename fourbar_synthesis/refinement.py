@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.optimize import least_squares
-from trajectory import generate_trajectory
+from fourbar_synthesis.trajectory import generate_trajectory
 
 def refine_candidate(input_len, A0, B0, C0, cp0, precision_pts):
     def residual(vars):

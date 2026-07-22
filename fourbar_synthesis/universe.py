@@ -1,7 +1,7 @@
-from classification import input_is_crank
-from coupler_grid import generate_coupler_grid
-from trajectory import generate_trajectory
-from evaluation import trajectory_error
+from fourbar_synthesis.classification import input_is_crank
+from fourbar_synthesis.coupler_grid import generate_coupler_grid
+from fourbar_synthesis.trajectory import generate_trajectory
+from fourbar_synthesis.evaluation import trajectory_error
 
 def evaluate_linkage(input_len, A, B, C, precision_pts):
     if not input_is_crank(input_len, A, B, C):

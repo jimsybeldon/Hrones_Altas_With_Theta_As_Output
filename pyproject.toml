@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "atlas_universe"
+version = "0.1.0"
+description = "Four-bar linkage synthesis engine"
+requires-python = ">=3.11"
+
+[tool.setuptools]
+packages = ["fourbar_synthesis"]

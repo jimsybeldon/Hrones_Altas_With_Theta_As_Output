@@ -1,0 +1,29 @@
+# Global project settings for Atlas_Universe
+
+input_length: 1.0
+angle_steps: 360
+
+# Coupler grid settings
+coupler_grid:
+  x_min: -1.0
+  x_max_offset: 1.0
+  y_min: -1.0
+  y_max: 1.0
+  spacing: 0.5
+
+# Universe sweep ranges
+sweep:
+  A_range: [0.5, 3.0]
+  B_range: [0.5, 3.0]
+  C_range: [0.5, 3.0]
+  steps: 50
+
+# Precision point settings
+precision_points:
+  max_points: 20
+  default_points: 3
+
+# Logging
+logging:
+  level: INFO
+  file: "results/logs/universe.log"
