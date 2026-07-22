@@ -1,0 +1,80 @@
+# ============================
+# Linkage_Synth Project Ignore
+# ============================
+
+# --- Python virtual environment ---
+.venv/
+venv/
+ENV/
+env/
+
+# --- Python cache & build artifacts ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+build/
+dist/
+
+# --- MATLAB Engine for Python ---
+# (MATLAB installs engine modules into site-packages; do NOT track them)
+matlabengineforpython*/
+matlab/
+matlab/*
+
+# --- MATLAB temporary files ---
+*.asv
+*.mex*
+*.mat
+*.slxc
+*.slx.autosave
+*.autosave
+
+# --- Jupyter Notebook checkpoints ---
+.ipynb_checkpoints/
+
+# --- VS Code workspace files ---
+.vscode/
+*.code-workspace
+
+# --- Data artifacts ---
+data/results/*.json
+data/results/*.csv
+data/*.tmp
+data/*.bak
+
+# --- Logs ---
+*.log
+
+# --- OS-specific ---
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# --- Backup files ---
+*.bak
+*.old
+*.orig
+*.tmpS
+
+# --- Project-specific ignores ---
+# Generated optimization outputs
+optimization_history.csv
+best_design.json
+
+# MATLAB Core test outputs
+matlab_core/*.fig
+
+# Python optimization scratch files
+python_opt/*.tmp
+python_opt/*.bak
+
+# Jupyter notebook auto-save
+*.ipynb~
