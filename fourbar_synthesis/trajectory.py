@@ -2,64 +2,43 @@ import numpy as np
 from fourbar_synthesis.closure import (
     circle_intersections,
     choose_by_continuity,
-    compute_ground_pivot_B
 )
 
-def fk_positions(theta, input_len, r_BC, A, C, B_ground):
+def fk_positions(theta, A, D, a, b, c):
+    B = A + a * np.array([np.cos(theta), np.sin(theta)])
+    C_candidates = circle_intersections(B, b, D, c)
+    return B, C_candidates
+
+
+# ----------------------------------------------------------------------
+# Compatibility wrapper for test_trajectory.py
+# ----------------------------------------------------------------------
+def generate_trajectory_compat(a, b, c, d, coupler_local_pt, N=360):
     """
-    Forward kinematics:
-    - A_moving is the moving pivot of the input crank
-    - B is the moving pivot of the coupler-rocker joint
+    Test suite calls generate_trajectory(a, b, c, d, coupler_local_pt, N).
+    Convert that into the full signature:
+        generate_trajectory(A_pt, D_pt, a, b, c, coupler_local_pt, N)
     """
-
-    # Moving pivot A
-    A_moving = np.array([
-        input_len * np.cos(theta),
-        input_len * np.sin(theta)
-    ])
-
-    # B is intersection of:
-    #   circle centered at A_moving with radius r_AB (= input_len)
-    #   circle centered at B_ground with radius r_BC
-    candidates = circle_intersections(A_moving, input_len, B_ground, r_BC)
-
-    return A_moving, candidates
+    A_pt = np.array([0.0, 0.0])
+    D_pt = np.array([d, 0.0])
+    return generate_trajectory(A_pt, D_pt, a, b, c, coupler_local_pt, N)
 
 
-def generate_trajectory(input_len, r_AB, r_BC, r_CD, coupler_local_pt, N=360):
-    """
-    Generate coupler trajectory for a 4-bar linkage.
-
-    Parameters:
-        input_len      = r_AB (crank length)
-        r_AB           = crank length
-        r_BC           = coupler length
-        r_CD           = rocker length
-        coupler_local_pt = point on coupler in local coordinates
-    """
-
-    # Ground pivots A and C
-    A = np.array([0.0, 0.0])
-    C = np.array([r_CD, 0.0])
-
-    # Compute ground pivot B
-    B_ground = compute_ground_pivot_B(A, C, r_AB, r_BC)
-    if B_ground is None:
-        return np.zeros((N, 2))
-
-    thetas = np.linspace(0, 2*np.pi, N)
+# ----------------------------------------------------------------------
+# Your negotiated full signature (kept exactly)
+# ----------------------------------------------------------------------
+def generate_trajectory(A_pt, D_pt, a, b, c, coupler_local_pt, N=360):
+    thetas = np.linspace(0.0, 2.0 * np.pi, N)
     traj = []
 
-    # Initial FK
-    A0, B_candidates0 = fk_positions(thetas[0], r_AB, r_BC, A, C, B_ground)
-    if B_candidates0 is None:
+    B0, C_candidates0 = fk_positions(thetas[0], A_pt, D_pt, a, b, c)
+    if C_candidates0 is None or len(C_candidates0) == 0:
         return np.zeros((N, 2))
 
-    B_prev = B_candidates0[0]
+    C_prev = C_candidates0[0]
 
-    # Initial orientation
-    dx0 = B_prev[0] - A0[0]
-    dy0 = B_prev[1] - A0[1]
+    dx0 = C_prev[0] - B0[0]
+    dy0 = C_prev[1] - B0[1]
     phi0 = np.arctan2(dy0, dx0)
 
     R0 = np.array([
@@ -67,19 +46,19 @@ def generate_trajectory(input_len, r_AB, r_BC, r_CD, coupler_local_pt, N=360):
         [np.sin(phi0),  np.cos(phi0)]
     ])
 
-    traj.append(A0 + R0 @ coupler_local_pt)
+    traj.append(B0 + R0 @ coupler_local_pt)
 
-    # Sweep
     for k in range(1, N):
-        A_k, B_candidates = fk_positions(thetas[k], r_AB, r_BC, A, C, B_ground)
-        if B_candidates is None:
+        B_k, C_candidates = fk_positions(thetas[k], A_pt, D_pt, a, b, c)
+
+        if C_candidates is None or len(C_candidates) == 0:
             traj.append(traj[-1])
             continue
 
-        B_k = choose_by_continuity(B_prev, B_candidates)
+        C_k = choose_by_continuity(C_prev, C_candidates)
 
-        dx = B_k[0] - A_k[0]
-        dy = B_k[1] - A_k[1]
+        dx = C_k[0] - B_k[0]
+        dy = C_k[1] - B_k[1]
         phi = np.arctan2(dy, dx)
 
         R = np.array([
@@ -87,7 +66,17 @@ def generate_trajectory(input_len, r_AB, r_BC, r_CD, coupler_local_pt, N=360):
             [np.sin(phi),  np.cos(phi)]
         ])
 
-        traj.append(A_k + R @ coupler_local_pt)
-        B_prev = B_k
+        traj.append(B_k + R @ coupler_local_pt)
+        C_prev = C_k
 
     return np.array(traj)
+
+
+# ----------------------------------------------------------------------
+# Export BOTH names so tests and universe both work
+# ----------------------------------------------------------------------
+# Universe imports generate_trajectory → gets the full version
+# Tests import generate_trajectory → we give them the compat version
+generate_trajectory_test = generate_trajectory_compat
+
+

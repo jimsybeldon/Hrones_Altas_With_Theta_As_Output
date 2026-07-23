@@ -1122,3 +1122,172 @@ Once FK is fully validated, refinement and end‑to‑end synthesis become meani
 
 You choose the next frontier — and we’ll build it with the same rigor that got you to 11/11 green.
 
+---
+
+Here’s a clean, A/B/C/D–aligned rewrite of `trajectory.py` using the link‑length identifiers you just confirmed:
+
+- **Nodes (points):**  
+  - `A` — ground pivot of crank (fixed at \((0,0)\) as reference)  
+  - `B` — moving pivot between crank and coupler  
+  - `C` — moving pivot between coupler and rocker  
+  - `D` — ground pivot of rocker (fixed at \((d,0)\) in this gauge)
+
+- **Link lengths (scalars):**  
+  - `a = |AB|` — input crank length  
+  - `b = |BC|` — coupler length  
+  - `c = |CD|` — rocker length  
+  - `d = |AD|` — ground‑pivot separation  
+
+The function keeps your existing call pattern:
+
+```python
+generate_trajectory(a, b, c, d, coupler_local_pt, N=360)
+```
+
+so your current tests that call:
+
+```python
+generate_trajectory(1.0, 1.5, 1.5, 1.5, np.array([0.5, 0.0]), N=60)
+```
+
+still match the semantics: `a=1.0, b=1.5, c=1.5, d=1.5`.
+
+---
+
+### ✅ Full `trajectory.py` (cut‑and‑paste)
+
+```python
+import numpy as np
+from fourbar_synthesis.closure import (
+    circle_intersections,
+    choose_by_continuity,
+)
+
+def fk_positions(theta, a, b, c, d):
+    """
+    Forward kinematics for a four-bar linkage in the A-B-C-D model.
+
+    Nodes:
+        A: ground pivot of crank (fixed at (0, 0))
+        B: moving pivot between crank and coupler
+        C: moving pivot between coupler and rocker
+        D: ground pivot of rocker (fixed at (d, 0))
+
+    Link lengths:
+        a = |AB|  (crank)
+        b = |BC|  (coupler)
+        c = |CD|  (rocker)
+        d = |AD|  (ground pivot separation)
+    """
+
+    # Ground pivots (gauge choice: AD along +x)
+    A = np.array([0.0, 0.0])
+    D = np.array([d, 0.0])
+
+    # Moving pivot B: crank rotating about A
+    B = A + a * np.array([np.cos(theta), np.sin(theta)])
+
+    # Moving pivot C: intersection of circles
+    #   centered at B with radius b (coupler)
+    #   centered at D with radius c (rocker)
+    C_candidates = circle_intersections(B, b, D, c)
+
+    return A, B, D, C_candidates
+
+
+def generate_trajectory(a, b, c, d, coupler_local_pt, N=360):
+    """
+    Generate the trajectory of a point on the coupler for a four-bar linkage.
+
+    Parameters:
+        a: crank length (|AB|)
+        b: coupler length (|BC|)
+        c: rocker length (|CD|)
+        d: ground pivot separation (|AD|)
+        coupler_local_pt: 2D point in coupler local coordinates,
+                          expressed relative to B and oriented along BC.
+        N: number of angle samples over one full rotation of the crank.
+
+    Returns:
+        traj: (N x 2) array of global coordinates of the coupler point.
+    """
+
+    thetas = np.linspace(0.0, 2.0 * np.pi, N)
+    traj = []
+
+    # Initial FK
+    A0, B0, D0, C_candidates0 = fk_positions(thetas[0], a, b, c, d)
+    if C_candidates0 is None or len(C_candidates0) == 0:
+        # No valid closure at initial position → return zero trajectory
+        return np.zeros((N, 2))
+
+    # Choose initial C
+    C_prev = C_candidates0[0]
+
+    # Initial coupler orientation: along BC
+    dx0 = C_prev[0] - B0[0]
+    dy0 = C_prev[1] - B0[1]
+    phi0 = np.arctan2(dy0, dx0)
+
+    R0 = np.array([
+        [np.cos(phi0), -np.sin(phi0)],
+        [np.sin(phi0),  np.cos(phi0)]
+    ])
+
+    # Coupler point in global coordinates
+    traj.append(B0 + R0 @ coupler_local_pt)
+
+    # Sweep over crank angles
+    for k in range(1, N):
+        A_k, B_k, D_k, C_candidates = fk_positions(thetas[k], a, b, c, d)
+
+        if C_candidates is None or len(C_candidates) == 0:
+            # No closure at this angle → hold previous point
+            traj.append(traj[-1])
+            continue
+
+        # Choose C_k by continuity from previous C
+        C_k = choose_by_continuity(C_prev, C_candidates)
+
+        # Coupler orientation at this step
+        dx = C_k[0] - B_k[0]
+        dy = C_k[1] - B_k[1]
+        phi = np.arctan2(dy, dx)
+
+        R = np.array([
+            [np.cos(phi), -np.sin(phi)],
+            [np.sin(phi),  np.cos(phi)]
+        ])
+
+        # Coupler point in global coordinates
+        traj.append(B_k + R @ coupler_local_pt)
+
+        # Update continuity reference
+        C_prev = C_k
+
+    return np.array(traj)
+```
+
+This version:
+
+- uses **A/B/C/D** as nodes and **a/b/c/d** as link lengths, exactly as you specified,  
+- keeps **A at (0,0)** and **AD along +x** as a gauge choice (you can always rotate the entire mechanism later),  
+- computes **B** from crank rotation about A,  
+- computes **C** from circle intersections of coupler and rocker about B and D,  
+- orients the coupler along **BC**,  
+- and generates the coupler point trajectory with continuity enforced via `choose_by_continuity`.
+
+You can drop this in as `fourbar_synthesis/trajectory.py` and keep your existing test call:
+
+```python
+generate_trajectory(1.0, 1.5, 1.5, 1.5, np.array([0.5, 0.0]), N=60)
+```
+
+which now cleanly maps to:
+
+- `a = 1.0`  
+- `b = 1.5`  
+- `c = 1.5`  
+- `d = 1.5`  
+
+When you’re ready, we can build the **Trajectory Correctness Suite** on top of this geometry.
