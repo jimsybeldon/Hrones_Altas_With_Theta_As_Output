@@ -1,0 +1,51 @@
+{
+    "geometry": "Near-Grashof limit",
+    "motion_type": "multi_branch",
+    "closure_rate": 0.43333333333333335,
+    "closure_intervals": [
+        [
+            0,
+            155
+        ],
+        [
+            564,
+            719
+        ]
+    ],
+    "num_intervals": 2,
+    "continuity": {
+        "max_C_step": 0.0475819141416462,
+        "max_alpha_step": 6.27445526932635,
+        "max_speed_step": 1.5274964337600445,
+        "mean_speed_step": 0.005032098523208884
+    },
+    "reentry_events": [
+        [
+            564,
+            {
+                "jump_distance": 0.9792628178754438,
+                "C_prev": [
+                    1.342691691938007,
+                    0.5675377887886282
+                ],
+                "C_selected": [
+                    1.2719108677057642,
+                    -0.4091636709186659
+                ]
+            }
+        ]
+    ],
+    "geometry_errors": {
+        "max_crank_err": 1.1102230246251565e-16,
+        "max_coupler_err": 4.440892098500626e-16,
+        "max_rocker_err": 4.440892098500626e-16
+    },
+    "singularity_indicators": {
+        "large_C_step": false,
+        "large_alpha_step": true,
+        "large_speed_step": true,
+        "low_closure_rate": true,
+        "many_reentries": false
+    },
+    "usability_score": 27
+}

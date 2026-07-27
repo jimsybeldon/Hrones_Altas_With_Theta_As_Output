@@ -1,0 +1,32 @@
+{
+    "geometry": "Crank-Rocker (baseline)",
+    "motion_type": "full_cycle",
+    "closure_rate": 1.0,
+    "closure_intervals": [
+        [
+            0,
+            719
+        ]
+    ],
+    "num_intervals": 1,
+    "continuity": {
+        "max_C_step": 0.02643732177076712,
+        "max_alpha_step": 0.017625109310579035,
+        "max_speed_step": 0.00022736508952821144,
+        "mean_speed_step": 2.968662836829776e-05
+    },
+    "reentry_events": [],
+    "geometry_errors": {
+        "max_crank_err": 1.1102230246251565e-16,
+        "max_coupler_err": 6.661338147750939e-16,
+        "max_rocker_err": 6.661338147750939e-16
+    },
+    "singularity_indicators": {
+        "large_C_step": false,
+        "large_alpha_step": false,
+        "large_speed_step": false,
+        "low_closure_rate": false,
+        "many_reentries": false
+    },
+    "usability_score": 100
+}
