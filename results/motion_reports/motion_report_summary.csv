@@ -1,6 +1,0 @@
-geometry,motion_type,closure_rate,usability_score,num_intervals,large_C_step,large_alpha_step,large_speed_step,low_closure_rate,many_reentries
-Crank-Rocker (baseline),full_cycle,1.0,100,1,False,False,False,False,False
-Near-Grashof limit,multi_branch,0.43333333333333335,27,2,False,True,True,True,False
-Double-Rocker,multi_branch,0.5,30,2,False,True,True,False,False
-Double-Crank,multi_branch,0.5805555555555556,55,2,False,False,True,False,False
-Near-Singular (almost collinear),multi_branch,0.41944444444444445,26,2,False,True,True,True,False

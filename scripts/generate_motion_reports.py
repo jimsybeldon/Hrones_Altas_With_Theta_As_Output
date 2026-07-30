@@ -39,7 +39,29 @@ def run_all_reports():
         )
         report = motion_classification_report(results, name)
 
+        # ------------------------------------------------------------
+        # Write JSON report to disk
+        # ------------------------------------------------------------
+        import os, json
+
+        output_dir = "results/motion_reports"
+        os.makedirs(output_dir, exist_ok=True)
+
+        safe_name = (
+            name.replace(" ", "_")
+                .replace("(", "")
+                .replace(")", "")
+                .replace("-", "_")
+        )
+        filename = safe_name + ".json"
+        path = os.path.join(output_dir, filename)
+
+        with open(path, "w") as f:
+            json.dump(report, f, indent=2)
+
+        # ------------------------------------------------------------
         # Pretty-print summary
+        # ------------------------------------------------------------
         print(f"Motion Type: {report['motion_type']}")
         print(f"Closure Rate: {report['closure_rate']:.3f}")
         print(f"Usability Score: {report['usability_score']}")

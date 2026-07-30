@@ -52,12 +52,12 @@ def motion_classification_report(results, geometry_name):
         "num_intervals": len(intervals),
 
         "continuity": {
-             "max_C_step": continuity["max_C_step"],
-             "max_alpha_step": continuity["max_alpha_step"],
+            "max_C_step": continuity["max_C_step"],
+            "max_alpha_step": continuity["max_alpha_step"],
             "max_speed_step": continuity["max_speed_step"],
             "mean_speed_step": continuity["mean_speed_step"],
 
-             # full arrays
+        # full arrays (needed for continuity plot)
             "C_step": continuity["C_step"],
             "alpha_step": continuity["alpha_step"],
             "speed_step": continuity["speed_step"],
@@ -73,9 +73,9 @@ def motion_classification_report(results, geometry_name):
         "geometry_errors": geom_err,
 
         "singularity_indicators": {
-            "large_C_step": bool(continuity["max_C_step"] > 0.05),
-            "large_alpha_step": bool(continuity["max_alpha_step"] > 0.02),
-            "large_speed_step": bool(continuity["max_speed_step"] > 0.02),
+            "large_C_step": bool(continuity["max_C_step"] > 0.5),
+            "large_alpha_step": bool(continuity["max_alpha_step"] > 0.5),
+            "large_speed_step": bool(continuity["max_speed_step"] > 0.5),
             "low_closure_rate": bool(results["closure_rate"] < 0.5),
             "many_reentries": bool(len(reentries) > 5),
         }

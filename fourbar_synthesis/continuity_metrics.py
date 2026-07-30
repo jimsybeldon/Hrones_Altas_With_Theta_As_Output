@@ -23,6 +23,10 @@ def compute_continuity_metrics(C_arr, alpha_arr, speed_arr, intervals):
 
     if len(C_steps) == 0:
         return {
+            "C_step": np.array([]),
+            "alpha_step": np.array([]),
+            "speed_step": np.array([]),
+
             "max_C_step": None,
             "max_alpha_step": None,
             "max_speed_step": None,
@@ -34,6 +38,10 @@ def compute_continuity_metrics(C_arr, alpha_arr, speed_arr, intervals):
     speed_all = np.concatenate(speed_steps)
 
     return {
+        "C_step": C_all,
+        "alpha_step": alpha_all,
+        "speed_step": speed_all,
+
         "max_C_step": np.max(C_all),
         "max_alpha_step": np.max(alpha_all),
         "max_speed_step": np.max(speed_all),
