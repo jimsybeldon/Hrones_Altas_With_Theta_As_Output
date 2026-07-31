@@ -67,17 +67,3 @@ def compute_ground_pivot_B(A, C, r_AB, r_BC):
         return None
     return pts[0]
 
-def compute_ground_pivot_D(A, a, b, c, AD):
-    B = A + np.array([a, 0.0])
-    C = B + np.array([b, 0.0])
-
-    D_candidates = circle_intersections(A, AD, C, c)
-    if D_candidates is None or len(D_candidates) == 0:
-        raise RuntimeError("No valid ground pivot D for this seed.")
-
-    if len(D_candidates) == 1:
-        return D_candidates[0]
-
-    D1, D2 = D_candidates
-    return D1 if D1[1] < D2[1] else D2
-

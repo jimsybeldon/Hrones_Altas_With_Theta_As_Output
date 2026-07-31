@@ -22,6 +22,8 @@ THETA_DESIGN = np.deg2rad(PRECISION_TASK["theta_deg"])
 STEP = 0.5
 B_LOCAL = 0.0  # pivot B at local coordinate 0
 
+# u-axis: 2 steps left, (2 + b/STEP) = 5 steps right
+# b = 1.5 → 1.5 / 0.5 = 3 → 2 + 3 = 5 steps right
 U_VALUES = [
     B_LOCAL - 2*STEP,   # -1.0
     B_LOCAL - 1*STEP,   # -0.5
@@ -33,6 +35,7 @@ U_VALUES = [
     B_LOCAL + 5*STEP,   # +2.5
 ]
 
+# v-axis: 2 steps down, pivot, 2 steps up
 V_VALUES = [
     -2*STEP,      # -1.0
     -1*STEP,      # -0.5
@@ -45,8 +48,9 @@ def generate_coupler_grid():
     return [(u, v) for u in U_VALUES for v in V_VALUES]
 
 
+
 # ----------------------------------------------------------------------
-# SEED LINKAGES FROM atlas_seeds.json
+# SEED LINKAGES (EXPLICIT, NO AUTO-VARYING)
 # Each seed: (a, b, c, AD)
 # ----------------------------------------------------------------------
 
@@ -100,12 +104,13 @@ def precision_fit_error_for_seed(a, b, c, AD, coupler_uv):
 
 
 # ----------------------------------------------------------------------
-# COUPLER POINT PATH
+# COUPLER POINT PATH (ADDED)
 # ----------------------------------------------------------------------
 
 def coupler_point_path(a, b, c, AD, u, v, cycles=1, steps_per_cycle=720, seed_index=None):
     A = np.array([0.0, 0.0])
     D = compute_ground_pivot_D(A, a, b, c, AD)
+
 
     N = cycles * steps_per_cycle
     thetas = np.linspace(0.0, 2.0*np.pi*cycles, N)
@@ -162,23 +167,15 @@ def coupler_point_path(a, b, c, AD, u, v, cycles=1, steps_per_cycle=720, seed_in
 
 
 # ----------------------------------------------------------------------
-# MULTI-SEED ATLAS GENERATION (GLOBAL TOP-10)
+# MULTI-SEED ATLAS GENERATION (NO JSON, JUST PRINT TOP-10)
 # ----------------------------------------------------------------------
 
 def generate_multi_seed_atlas():
     coupler_grid = generate_coupler_grid()
-    global_candidates = []
 
     for seed_idx, (a, b, c, AD) in enumerate(SEED_LINKAGES):
         A = np.array([0.0, 0.0])
-
-        try:
-            D = compute_ground_pivot_D(A, a, b, c, AD)
-        except Exception as e:
-            print(f"\n=== {SEED_NAMES[seed_idx]} ({seed_idx+1}/{len(SEED_LINKAGES)}) ===")
-            print(f"a={a}, b={b}, c={c}, AD={AD}")
-            print(f"  Ground‑pivot computation failed for seed {seed_idx}: {e} — skipping seed.")
-            continue
+        D = compute_ground_pivot_D(A, a, b, c, AD)
 
         print(f"\n=== {SEED_NAMES[seed_idx]} ({seed_idx+1}/{len(SEED_LINKAGES)}) ===")
         print(f"a={a}, b={b}, c={c}, AD={AD}")
@@ -188,7 +185,6 @@ def generate_multi_seed_atlas():
         except Exception as e:
             print(f"  FK stress test failed for seed {seed_idx}: {e} — skipping seed.")
             continue
- 
 
         motion_type = fk_results["motion_type"]
         closure_rate = fk_results["closure_rate"]
@@ -206,49 +202,90 @@ def generate_multi_seed_atlas():
                 "closure_rate": closure_rate,
             })
 
-        global_candidates.extend(candidates)
+        candidates.sort(key=lambda d: d["precision_fit_error"])
+        top_k = candidates[:10]
 
-    # ------------------------------------------------------------
-    # GLOBAL TOP‑10 ACROSS ALL SEEDS
-    # ------------------------------------------------------------
-    global_candidates.sort(key=lambda d: d["precision_fit_error"])
-    top10_global = global_candidates[:10]
+        print(f"Top candidates for seed {seed_idx}:")
+        for rank, cand in enumerate(top_k, start=1):
+            u, v = cand["coupler_point"]
+            err = cand["precision_fit_error"]
+            print(
+                f"  #{rank}: {cand['geometry']}  "
+                f"u={u:+.3f}, v={v:+.3f}, err={err:.6f}, "
+                f"motion={cand['motion_type']}, closure_rate={cand['closure_rate']:.3f}"
+            )
 
-    print("\n=== GLOBAL TOP‑10 BEST FITS ACROSS ALL SEEDS ===")
-    for rank, cand in enumerate(top10_global, start=1):
-        seed_idx = cand["seed_index"]
-        u, v = cand["coupler_point"]
-        err = cand["precision_fit_error"]
-        a, b, c, AD = cand["seed_linkage"]
+        # Plot all top‑10 candidates (static paths)
+        print("\nPlotting all top‑10 candidates...")
+        for rank, cand in enumerate(top_k, start=1):
+            u, v = cand["coupler_point"]
+            print(f"\nPlot #{rank}: u={u:+.3f}, v={v:+.3f}, err={cand['precision_fit_error']:.6f}")
+            plot_coupler_path_with_precision(a, b, c, AD, u, v, seed_index=seed_idx)
 
-        print(
-            f"#{rank}: {SEED_NAMES[seed_idx]}  "
-            f"a={a}, b={b}, c={c}, AD={AD}  "
-            f"u={u:+.3f}, v={v:+.3f}, err={err:.6f}"
-        )
+        # Best candidate: path sample + overlay + plot + animation
+        best_u, best_v = top_k[0]["coupler_point"]
+        thetas, P = coupler_point_path(a, b, c, AD, best_u, best_v)
 
-    print("\nPlotting GLOBAL top‑10 candidates...")
+        print(f"\nCoupler point path for best candidate (u={best_u:+.3f}, v={best_v:+.3f}):")
+        for k in range(10):
+            print(f"  theta={thetas[k]:+.4f}  P=({P[k,0]:+.4f}, {P[k,1]:+.4f})")
 
-    for rank, cand in enumerate(top10_global, start=1):
-        seed_idx = cand["seed_index"]
-        a, b, c, AD = cand["seed_linkage"]
-        u, v = cand["coupler_point"]
-
-        print(f"\nPlot #{rank}: {SEED_NAMES[seed_idx]}  u={u:+.3f}, v={v:+.3f}, err={cand['precision_fit_error']:.6f}")
-        plot_coupler_path_with_precision(a, b, c, AD, u, v, seed_index=seed_idx)
-
-    # Best global candidate: overlay + plot + animations
-    best = top10_global[0]
-    seed_idx = best["seed_index"]
-    a, b, c, AD = best["seed_linkage"]
-    u, v = best["coupler_point"]
-
-    precision_point_overlay_summary(a, b, c, AD, u, v, seed_index=seed_idx)
-    plot_coupler_path_with_precision(a, b, c, AD, u, v, seed_index=seed_idx)
-    animate_coupler_path(a, b, c, AD, u, v, seed_index=seed_idx)
-    animate_full_linkage(a, b, c, AD, u, v, seed_index=seed_idx)
+        precision_point_overlay_summary(a, b, c, AD, best_u, best_v)
+        plot_coupler_path_with_precision(a, b, c, AD, best_u, best_v, seed_index=seed_idx)
+        animate_coupler_path(a, b, c, AD, best_u, best_v, seed_index=seed_idx)
+        animate_full_linkage(a, b, c, AD, best_u, best_v, seed_index=seed_idx)
 
     print("\nMulti-seed atlas generation complete (no JSON written).")
+
+
+
+# ----------------------------------------------------------------------
+# PRECISION-POINT OVERLAY (PRINT TRUE COUPLER POINT VS TARGET POINTS)
+# ----------------------------------------------------------------------
+
+def plot_coupler_path_with_precision(a, b, c, AD, u, v, seed_index=None):
+    A = np.array([0.0, 0.0])
+    D = compute_ground_pivot_D(A, a, b, c, AD)
+
+    # Full coupler path
+    thetas, P = coupler_point_path(a, b, c, AD, u, v)
+
+    # Indices in `thetas` that correspond (closest) to each design angle in THETA_DESIGN
+    design_indices = np.array([
+        np.argmin(np.abs(thetas - theta_d))
+        for theta_d in THETA_DESIGN
+    ])
+
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    # Title block
+    if seed_index is not None:
+        ax.set_title(
+            f"{SEED_NAMES[seed_index]}\n"
+            f"a={a:.3f}, b={b:.3f}, c={c:.3f}, AD={AD:.3f}\n"
+            f"u={u:+.3f}, v={v:+.3f}"
+        )
+    else:
+        ax.set_title(
+            f"a={a:.3f}, b={b:.3f}, c={c:.3f}, AD={AD:.3f}\n"
+            f"u={u:+.3f}, v={v:+.3f}"
+        )
+
+    # Coupler path
+    ax.plot(P[:, 0], P[:, 1], 'k-', label="Coupler Path")
+
+    # Precision points
+    PP = np.array(PRECISION_POINTS)
+    ax.plot(PP[:, 0], PP[:, 1], 'rx', label="Precision Points")
+
+    # Coupler @ design angles (sampled from the path at those indices)
+    ax.plot(P[design_indices, 0], P[design_indices, 1], 'bo', label="Coupler @ Design Angles")
+
+    ax.set_xlabel("X")
+    ax.set_ylabel("Y")
+    ax.grid(True)
+    ax.legend()
+    plt.show()
 
 
 # ----------------------------------------------------------------------
@@ -256,6 +293,13 @@ def generate_multi_seed_atlas():
 # ----------------------------------------------------------------------
 
 def precision_point_overlay_summary(a, b, c, AD, u, v, seed_index=None):
+    """
+    Print a compact summary table comparing:
+      - target precision points
+      - actual coupler points at design angles
+      - error magnitudes
+    """
+
     A = np.array([0.0, 0.0])
     D = compute_ground_pivot_D(A, a, b, c, AD)
     cp_local = np.array([u, v])
@@ -300,7 +344,6 @@ def precision_point_overlay_summary(a, b, c, AD, u, v, seed_index=None):
 
     print("  -----------------------------------------------------------\n")
 
-
 # ----------------------------------------------------------------------
 # PLOTTING: COUPLER PATH + PRECISION POINTS + DESIGN-ANGLE POINTS
 # ----------------------------------------------------------------------
@@ -308,11 +351,13 @@ def precision_point_overlay_summary(a, b, c, AD, u, v, seed_index=None):
 import matplotlib.pyplot as plt
 
 def plot_coupler_path_with_precision(a, b, c, AD, u, v, seed_index=None):
+
     A = np.array([0.0, 0.0])
     D = compute_ground_pivot_D(A, a, b, c, AD)
 
     thetas, P = coupler_point_path(a, b, c, AD, u, v)
 
+    # Compute indices of design angles within the full theta array
     DESIGN_INDICES = np.array([
         np.argmin(np.abs(thetas - theta_d))
         for theta_d in THETA_DESIGN
@@ -320,6 +365,7 @@ def plot_coupler_path_with_precision(a, b, c, AD, u, v, seed_index=None):
 
     fig, ax = plt.subplots(figsize=(8, 6))
 
+    # Title block
     if seed_index is not None:
         ax.set_title(
             f"{SEED_NAMES[seed_index]}\n"
@@ -332,11 +378,14 @@ def plot_coupler_path_with_precision(a, b, c, AD, u, v, seed_index=None):
             f"u={u:+.3f}, v={v:+.3f}"
         )
 
+    # Coupler path
     ax.plot(P[:,0], P[:,1], 'k-', label="Coupler Path")
 
-    PP = PRECISION_POINTS
+    # Precision points
+    PP = np.array(PRECISION_POINTS)
     ax.plot(PP[:,0], PP[:,1], 'rx', label="Precision Points")
 
+    # Coupler @ design angles
     ax.plot(P[DESIGN_INDICES,0], P[DESIGN_INDICES,1], 'bo', label="Coupler @ Design Angles")
 
     ax.set_xlabel("X")
@@ -353,29 +402,37 @@ def plot_coupler_path_with_precision(a, b, c, AD, u, v, seed_index=None):
 import matplotlib.animation as animation
 
 def animate_coupler_path(a, b, c, AD, u, v, cycles=1, steps_per_cycle=720, seed_index=None):
+    """
+    Animate the coupler point motion for the given linkage and coupler point.
+    """
+
+    # Compute full path
     thetas, P_arr = coupler_point_path(a, b, c, AD, u, v, cycles=cycles, steps_per_cycle=steps_per_cycle)
 
     fig, ax = plt.subplots(figsize=(8, 6))
 
+    # Full path (static background)
     ax.plot(P_arr[:,0], P_arr[:,1], 'k-', linewidth=2, label="Coupler Path")
 
-    px = PRECISION_POINTS[:,0]
-    py = PRECISION_POINTS[:,1]
+    # Precision points
+    px = [p[0] for p in PRECISION_POINTS]
+    py = [p[1] for p in PRECISION_POINTS]
     ax.scatter(px, py, color='red', marker='x', s=100, label="Precision Points")
 
+    # Animated point
     point, = ax.plot([], [], 'bo', markersize=8)
 
     if seed_index is not None:
         ax.set_title(
-            f"{SEED_NAMES[seed_index]}\n"
-            f"a={a:.3f}, b={b:.3f}, c={c:.3f}, AD={AD:.3f}\n"
-            f"u={u:+.3f}, v={v:+.3f}"
-        )
+        f"{SEED_NAMES[seed_index]}\n"
+        f"a={a:.3f}, b={b:.3f}, c={c:.3f}, AD={AD:.3f}\n"
+        f"u={u:+.3f}, v={v:+.3f}"
+    )
     else:
         ax.set_title(
-            f"a={a:.3f}, b={b:.3f}, c={c:.3f}, AD={AD:.3f}\n"
-            f"u={u:+.3f}, v={v:+.3f}"
-        )
+        f"a={a:.3f}, b={b:.3f}, c={c:.3f}, AD={AD:.3f}\n"
+        f"u={u:+.3f}, v={v:+.3f}"
+    )
 
     ax.set_xlabel("X")
     ax.set_ylabel("Y")
@@ -404,31 +461,43 @@ def animate_coupler_path(a, b, c, AD, u, v, cycles=1, steps_per_cycle=720, seed_
 
     plt.show()
 
-
 # ----------------------------------------------------------------------
 # ANIMATION: FULL LINKAGE GEOMETRY (A-B-C-D + Coupler Point)
 # ----------------------------------------------------------------------
 
 def animate_full_linkage(a, b, c, AD, u, v, cycles=1, steps_per_cycle=720, seed_index=None):
+    """
+    Animate the full four-bar linkage:
+      - A, B, C, D pivots
+      - Links AB, BC, CD
+      - Coupler point P
+      - Full coupler path
+      - Precision points
+    """
+
     A = np.array([0.0, 0.0])
     D = compute_ground_pivot_D(A, a, b, c, AD)
 
     cp_local = np.array([u, v])
 
+    # Compute full path
     thetas, P_arr = coupler_point_path(a, b, c, AD, u, v,
                                        cycles=cycles,
                                        steps_per_cycle=steps_per_cycle)
 
+    # Also compute B and C arrays for animation
     N = len(thetas)
     B_arr = np.zeros((N, 2))
     C_arr = np.zeros((N, 2))
 
+    # Initial closure
     th0 = thetas[0]
     B0, C_candidates0 = fk_positions(th0, A, D, a, b, c)
     C_prev = C_candidates0[0]
     B_arr[0] = B0
     C_arr[0] = C_prev
 
+    # March through theta
     for k in range(1, N):
         th = thetas[k]
         B_k, C_candidates = fk_positions(th, A, D, a, b, c)
@@ -443,14 +512,18 @@ def animate_full_linkage(a, b, c, AD, u, v, cycles=1, steps_per_cycle=720, seed_
         C_arr[k] = C_k
         C_prev = C_k
 
+    # Plot + animate
     fig, ax = plt.subplots(figsize=(8, 6))
 
+    # Static background: full coupler path
     ax.plot(P_arr[:,0], P_arr[:,1], 'k-', linewidth=2, label="Coupler Path")
 
-    px = PRECISION_POINTS[:,0]
-    py = PRECISION_POINTS[:,1]
+    # Precision points
+    px = [p[0] for p in PRECISION_POINTS]
+    py = [p[1] for p in PRECISION_POINTS]
     ax.scatter(px, py, color='red', marker='x', s=100, label="Precision Points")
 
+    # Animated elements
     link_AB, = ax.plot([], [], 'b-', linewidth=3)
     link_BC, = ax.plot([], [], 'g-', linewidth=3)
     link_CD, = ax.plot([], [], 'm-', linewidth=3)
@@ -458,7 +531,7 @@ def animate_full_linkage(a, b, c, AD, u, v, cycles=1, steps_per_cycle=720, seed_
 
     if seed_index is not None:
         ax.set_title(
-            f"{SEED_NAMES[seed_index]}\n"
+            f"Seed {seed_index}\n"
             f"a={a:.3f}, b={b:.3f}, c={c:.3f}, AD={AD:.3f}\n"
             f"u={u:+.3f}, v={v:+.3f}"
         )
@@ -486,9 +559,16 @@ def animate_full_linkage(a, b, c, AD, u, v, cycles=1, steps_per_cycle=720, seed_
         C = C_arr[frame]
         P = P_arr[frame]
 
+        # Link A-B
         link_AB.set_data([A[0], B[0]], [A[1], B[1]])
+
+        # Link B-C
         link_BC.set_data([B[0], C[0]], [B[1], C[1]])
+
+        # Link C-D
         link_CD.set_data([C[0], D[0]], [C[1], D[1]])
+
+        # Coupler point
         coupler_point.set_data([P[0]], [P[1]])
 
         return link_AB, link_BC, link_CD, coupler_point

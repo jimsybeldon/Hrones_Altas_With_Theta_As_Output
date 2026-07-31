@@ -1,0 +1,1212 @@
+[
+  {
+    "geometry": "HN_u-0.500_v-0.500",
+    "coupler_point": [
+      -0.5,
+      -0.5
+    ],
+    "precision_fit_error": 28.60586230568417,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.500_v-0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.500_v-0.500.json"
+  },
+  {
+    "geometry": "HN_u-0.500_v-0.400",
+    "coupler_point": [
+      -0.5,
+      -0.4
+    ],
+    "precision_fit_error": 27.593255161686884,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.500_v-0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.500_v-0.400.json"
+  },
+  {
+    "geometry": "HN_u-0.500_v-0.300",
+    "coupler_point": [
+      -0.5,
+      -0.3
+    ],
+    "precision_fit_error": 26.640648017689603,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.500_v-0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.500_v-0.300.json"
+  },
+  {
+    "geometry": "HN_u-0.500_v-0.200",
+    "coupler_point": [
+      -0.5,
+      -0.19999999999999996
+    ],
+    "precision_fit_error": 25.748040873692318,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.500_v-0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.500_v-0.200.json"
+  },
+  {
+    "geometry": "HN_u-0.500_v-0.100",
+    "coupler_point": [
+      -0.5,
+      -0.09999999999999998
+    ],
+    "precision_fit_error": 24.915433729695035,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.500_v-0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.500_v-0.100.json"
+  },
+  {
+    "geometry": "HN_u-0.500_v+0.000",
+    "coupler_point": [
+      -0.5,
+      0.0
+    ],
+    "precision_fit_error": 24.14282658569775,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.500_v+0.000.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.500_v+0.000.json"
+  },
+  {
+    "geometry": "HN_u-0.500_v+0.100",
+    "coupler_point": [
+      -0.5,
+      0.10000000000000009
+    ],
+    "precision_fit_error": 23.43021944170047,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.500_v+0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.500_v+0.100.json"
+  },
+  {
+    "geometry": "HN_u-0.500_v+0.200",
+    "coupler_point": [
+      -0.5,
+      0.20000000000000007
+    ],
+    "precision_fit_error": 22.777612297703186,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.500_v+0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.500_v+0.200.json"
+  },
+  {
+    "geometry": "HN_u-0.500_v+0.300",
+    "coupler_point": [
+      -0.5,
+      0.30000000000000004
+    ],
+    "precision_fit_error": 22.185005153705905,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.500_v+0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.500_v+0.300.json"
+  },
+  {
+    "geometry": "HN_u-0.500_v+0.400",
+    "coupler_point": [
+      -0.5,
+      0.4
+    ],
+    "precision_fit_error": 21.652398009708623,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.500_v+0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.500_v+0.400.json"
+  },
+  {
+    "geometry": "HN_u-0.500_v+0.500",
+    "coupler_point": [
+      -0.5,
+      0.5
+    ],
+    "precision_fit_error": 21.17979086571134,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.500_v+0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.500_v+0.500.json"
+  },
+  {
+    "geometry": "HN_u-0.400_v-0.500",
+    "coupler_point": [
+      -0.4,
+      -0.5
+    ],
+    "precision_fit_error": 27.80204110021885,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.400_v-0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.400_v-0.500.json"
+  },
+  {
+    "geometry": "HN_u-0.400_v-0.400",
+    "coupler_point": [
+      -0.4,
+      -0.4
+    ],
+    "precision_fit_error": 26.789433956221565,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.400_v-0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.400_v-0.400.json"
+  },
+  {
+    "geometry": "HN_u-0.400_v-0.300",
+    "coupler_point": [
+      -0.4,
+      -0.3
+    ],
+    "precision_fit_error": 25.83682681222428,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.400_v-0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.400_v-0.300.json"
+  },
+  {
+    "geometry": "HN_u-0.400_v-0.200",
+    "coupler_point": [
+      -0.4,
+      -0.19999999999999996
+    ],
+    "precision_fit_error": 24.944219668227007,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.400_v-0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.400_v-0.200.json"
+  },
+  {
+    "geometry": "HN_u-0.400_v-0.100",
+    "coupler_point": [
+      -0.4,
+      -0.09999999999999998
+    ],
+    "precision_fit_error": 24.11161252422972,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.400_v-0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.400_v-0.100.json"
+  },
+  {
+    "geometry": "HN_u-0.400_v+0.000",
+    "coupler_point": [
+      -0.4,
+      0.0
+    ],
+    "precision_fit_error": 23.339005380232436,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.400_v+0.000.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.400_v+0.000.json"
+  },
+  {
+    "geometry": "HN_u-0.400_v+0.100",
+    "coupler_point": [
+      -0.4,
+      0.10000000000000009
+    ],
+    "precision_fit_error": 22.626398236235154,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.400_v+0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.400_v+0.100.json"
+  },
+  {
+    "geometry": "HN_u-0.400_v+0.200",
+    "coupler_point": [
+      -0.4,
+      0.20000000000000007
+    ],
+    "precision_fit_error": 21.97379109223787,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.400_v+0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.400_v+0.200.json"
+  },
+  {
+    "geometry": "HN_u-0.400_v+0.300",
+    "coupler_point": [
+      -0.4,
+      0.30000000000000004
+    ],
+    "precision_fit_error": 21.38118394824059,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.400_v+0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.400_v+0.300.json"
+  },
+  {
+    "geometry": "HN_u-0.400_v+0.400",
+    "coupler_point": [
+      -0.4,
+      0.4
+    ],
+    "precision_fit_error": 20.848576804243308,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.400_v+0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.400_v+0.400.json"
+  },
+  {
+    "geometry": "HN_u-0.400_v+0.500",
+    "coupler_point": [
+      -0.4,
+      0.5
+    ],
+    "precision_fit_error": 20.375969660246025,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.400_v+0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.400_v+0.500.json"
+  },
+  {
+    "geometry": "HN_u-0.300_v-0.500",
+    "coupler_point": [
+      -0.3,
+      -0.5
+    ],
+    "precision_fit_error": 27.058219894753538,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.300_v-0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.300_v-0.500.json"
+  },
+  {
+    "geometry": "HN_u-0.300_v-0.400",
+    "coupler_point": [
+      -0.3,
+      -0.4
+    ],
+    "precision_fit_error": 26.045612750756256,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.300_v-0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.300_v-0.400.json"
+  },
+  {
+    "geometry": "HN_u-0.300_v-0.300",
+    "coupler_point": [
+      -0.3,
+      -0.3
+    ],
+    "precision_fit_error": 25.09300560675897,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.300_v-0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.300_v-0.300.json"
+  },
+  {
+    "geometry": "HN_u-0.300_v-0.200",
+    "coupler_point": [
+      -0.3,
+      -0.19999999999999996
+    ],
+    "precision_fit_error": 24.200398462761683,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.300_v-0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.300_v-0.200.json"
+  },
+  {
+    "geometry": "HN_u-0.300_v-0.100",
+    "coupler_point": [
+      -0.3,
+      -0.09999999999999998
+    ],
+    "precision_fit_error": 23.367791318764404,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.300_v-0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.300_v-0.100.json"
+  },
+  {
+    "geometry": "HN_u-0.300_v+0.000",
+    "coupler_point": [
+      -0.3,
+      0.0
+    ],
+    "precision_fit_error": 22.595184174767127,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.300_v+0.000.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.300_v+0.000.json"
+  },
+  {
+    "geometry": "HN_u-0.300_v+0.100",
+    "coupler_point": [
+      -0.3,
+      0.10000000000000009
+    ],
+    "precision_fit_error": 21.88257703076984,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.300_v+0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.300_v+0.100.json"
+  },
+  {
+    "geometry": "HN_u-0.300_v+0.200",
+    "coupler_point": [
+      -0.3,
+      0.20000000000000007
+    ],
+    "precision_fit_error": 21.229969886772558,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.300_v+0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.300_v+0.200.json"
+  },
+  {
+    "geometry": "HN_u-0.300_v+0.300",
+    "coupler_point": [
+      -0.3,
+      0.30000000000000004
+    ],
+    "precision_fit_error": 20.637362742775274,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.300_v+0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.300_v+0.300.json"
+  },
+  {
+    "geometry": "HN_u-0.300_v+0.400",
+    "coupler_point": [
+      -0.3,
+      0.4
+    ],
+    "precision_fit_error": 20.104755598777988,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.300_v+0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.300_v+0.400.json"
+  },
+  {
+    "geometry": "HN_u-0.300_v+0.500",
+    "coupler_point": [
+      -0.3,
+      0.5
+    ],
+    "precision_fit_error": 19.632148454780708,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.300_v+0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.300_v+0.500.json"
+  },
+  {
+    "geometry": "HN_u-0.200_v-0.500",
+    "coupler_point": [
+      -0.19999999999999996,
+      -0.5
+    ],
+    "precision_fit_error": 26.37439868928822,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.200_v-0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.200_v-0.500.json"
+  },
+  {
+    "geometry": "HN_u-0.200_v-0.400",
+    "coupler_point": [
+      -0.19999999999999996,
+      -0.4
+    ],
+    "precision_fit_error": 25.361791545290934,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.200_v-0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.200_v-0.400.json"
+  },
+  {
+    "geometry": "HN_u-0.200_v-0.300",
+    "coupler_point": [
+      -0.19999999999999996,
+      -0.3
+    ],
+    "precision_fit_error": 24.409184401293658,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.200_v-0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.200_v-0.300.json"
+  },
+  {
+    "geometry": "HN_u-0.200_v-0.200",
+    "coupler_point": [
+      -0.19999999999999996,
+      -0.19999999999999996
+    ],
+    "precision_fit_error": 23.516577257296376,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.200_v-0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.200_v-0.200.json"
+  },
+  {
+    "geometry": "HN_u-0.200_v-0.100",
+    "coupler_point": [
+      -0.19999999999999996,
+      -0.09999999999999998
+    ],
+    "precision_fit_error": 22.68397011329909,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.200_v-0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.200_v-0.100.json"
+  },
+  {
+    "geometry": "HN_u-0.200_v+0.000",
+    "coupler_point": [
+      -0.19999999999999996,
+      0.0
+    ],
+    "precision_fit_error": 21.911362969301805,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.200_v+0.000.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.200_v+0.000.json"
+  },
+  {
+    "geometry": "HN_u-0.200_v+0.100",
+    "coupler_point": [
+      -0.19999999999999996,
+      0.10000000000000009
+    ],
+    "precision_fit_error": 21.198755825304524,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.200_v+0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.200_v+0.100.json"
+  },
+  {
+    "geometry": "HN_u-0.200_v+0.200",
+    "coupler_point": [
+      -0.19999999999999996,
+      0.20000000000000007
+    ],
+    "precision_fit_error": 20.54614868130724,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.200_v+0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.200_v+0.200.json"
+  },
+  {
+    "geometry": "HN_u-0.200_v+0.300",
+    "coupler_point": [
+      -0.19999999999999996,
+      0.30000000000000004
+    ],
+    "precision_fit_error": 19.95354153730996,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.200_v+0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.200_v+0.300.json"
+  },
+  {
+    "geometry": "HN_u-0.200_v+0.400",
+    "coupler_point": [
+      -0.19999999999999996,
+      0.4
+    ],
+    "precision_fit_error": 19.420934393312677,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.200_v+0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.200_v+0.400.json"
+  },
+  {
+    "geometry": "HN_u-0.200_v+0.500",
+    "coupler_point": [
+      -0.19999999999999996,
+      0.5
+    ],
+    "precision_fit_error": 18.94832724931539,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.200_v+0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.200_v+0.500.json"
+  },
+  {
+    "geometry": "HN_u-0.100_v-0.500",
+    "coupler_point": [
+      -0.09999999999999998,
+      -0.5
+    ],
+    "precision_fit_error": 25.750577483822905,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.100_v-0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.100_v-0.500.json"
+  },
+  {
+    "geometry": "HN_u-0.100_v-0.400",
+    "coupler_point": [
+      -0.09999999999999998,
+      -0.4
+    ],
+    "precision_fit_error": 24.737970339825623,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.100_v-0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.100_v-0.400.json"
+  },
+  {
+    "geometry": "HN_u-0.100_v-0.300",
+    "coupler_point": [
+      -0.09999999999999998,
+      -0.3
+    ],
+    "precision_fit_error": 23.78536319582834,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.100_v-0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.100_v-0.300.json"
+  },
+  {
+    "geometry": "HN_u-0.100_v-0.200",
+    "coupler_point": [
+      -0.09999999999999998,
+      -0.19999999999999996
+    ],
+    "precision_fit_error": 22.892756051831057,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.100_v-0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.100_v-0.200.json"
+  },
+  {
+    "geometry": "HN_u-0.100_v-0.100",
+    "coupler_point": [
+      -0.09999999999999998,
+      -0.09999999999999998
+    ],
+    "precision_fit_error": 22.060148907833774,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.100_v-0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.100_v-0.100.json"
+  },
+  {
+    "geometry": "HN_u-0.100_v+0.000",
+    "coupler_point": [
+      -0.09999999999999998,
+      0.0
+    ],
+    "precision_fit_error": 21.28754176383649,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.100_v+0.000.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.100_v+0.000.json"
+  },
+  {
+    "geometry": "HN_u-0.100_v+0.100",
+    "coupler_point": [
+      -0.09999999999999998,
+      0.10000000000000009
+    ],
+    "precision_fit_error": 20.57493461983921,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.100_v+0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.100_v+0.100.json"
+  },
+  {
+    "geometry": "HN_u-0.100_v+0.200",
+    "coupler_point": [
+      -0.09999999999999998,
+      0.20000000000000007
+    ],
+    "precision_fit_error": 19.922327475841925,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.100_v+0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.100_v+0.200.json"
+  },
+  {
+    "geometry": "HN_u-0.100_v+0.300",
+    "coupler_point": [
+      -0.09999999999999998,
+      0.30000000000000004
+    ],
+    "precision_fit_error": 19.329720331844644,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.100_v+0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.100_v+0.300.json"
+  },
+  {
+    "geometry": "HN_u-0.100_v+0.400",
+    "coupler_point": [
+      -0.09999999999999998,
+      0.4
+    ],
+    "precision_fit_error": 18.79711318784736,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.100_v+0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.100_v+0.400.json"
+  },
+  {
+    "geometry": "HN_u-0.100_v+0.500",
+    "coupler_point": [
+      -0.09999999999999998,
+      0.5
+    ],
+    "precision_fit_error": 18.32450604385008,
+    "candidate_file": "results/linkage_candidates\\HN_u-0.100_v+0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u-0.100_v+0.500.json"
+  },
+  {
+    "geometry": "HN_u+0.000_v-0.500",
+    "coupler_point": [
+      0.0,
+      -0.5
+    ],
+    "precision_fit_error": 25.186756278357585,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.000_v-0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.000_v-0.500.json"
+  },
+  {
+    "geometry": "HN_u+0.000_v-0.400",
+    "coupler_point": [
+      0.0,
+      -0.4
+    ],
+    "precision_fit_error": 24.17414913436031,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.000_v-0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.000_v-0.400.json"
+  },
+  {
+    "geometry": "HN_u+0.000_v-0.300",
+    "coupler_point": [
+      0.0,
+      -0.3
+    ],
+    "precision_fit_error": 23.221541990363022,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.000_v-0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.000_v-0.300.json"
+  },
+  {
+    "geometry": "HN_u+0.000_v-0.200",
+    "coupler_point": [
+      0.0,
+      -0.19999999999999996
+    ],
+    "precision_fit_error": 22.32893484636574,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.000_v-0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.000_v-0.200.json"
+  },
+  {
+    "geometry": "HN_u+0.000_v-0.100",
+    "coupler_point": [
+      0.0,
+      -0.09999999999999998
+    ],
+    "precision_fit_error": 21.49632770236846,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.000_v-0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.000_v-0.100.json"
+  },
+  {
+    "geometry": "HN_u+0.000_v+0.000",
+    "coupler_point": [
+      0.0,
+      0.0
+    ],
+    "precision_fit_error": 20.723720558371177,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.000_v+0.000.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.000_v+0.000.json"
+  },
+  {
+    "geometry": "HN_u+0.000_v+0.100",
+    "coupler_point": [
+      0.0,
+      0.10000000000000009
+    ],
+    "precision_fit_error": 20.01111341437389,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.000_v+0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.000_v+0.100.json"
+  },
+  {
+    "geometry": "HN_u+0.000_v+0.200",
+    "coupler_point": [
+      0.0,
+      0.20000000000000007
+    ],
+    "precision_fit_error": 19.358506270376612,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.000_v+0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.000_v+0.200.json"
+  },
+  {
+    "geometry": "HN_u+0.000_v+0.300",
+    "coupler_point": [
+      0.0,
+      0.30000000000000004
+    ],
+    "precision_fit_error": 18.765899126379328,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.000_v+0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.000_v+0.300.json"
+  },
+  {
+    "geometry": "HN_u+0.000_v+0.400",
+    "coupler_point": [
+      0.0,
+      0.4
+    ],
+    "precision_fit_error": 18.233291982382045,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.000_v+0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.000_v+0.400.json"
+  },
+  {
+    "geometry": "HN_u+0.000_v+0.500",
+    "coupler_point": [
+      0.0,
+      0.5
+    ],
+    "precision_fit_error": 17.760684838384762,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.000_v+0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.000_v+0.500.json"
+  },
+  {
+    "geometry": "HN_u+0.100_v-0.500",
+    "coupler_point": [
+      0.10000000000000009,
+      -0.5
+    ],
+    "precision_fit_error": 24.68293507289227,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.100_v-0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.100_v-0.500.json"
+  },
+  {
+    "geometry": "HN_u+0.100_v-0.400",
+    "coupler_point": [
+      0.10000000000000009,
+      -0.4
+    ],
+    "precision_fit_error": 23.670327928894988,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.100_v-0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.100_v-0.400.json"
+  },
+  {
+    "geometry": "HN_u+0.100_v-0.300",
+    "coupler_point": [
+      0.10000000000000009,
+      -0.3
+    ],
+    "precision_fit_error": 22.717720784897708,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.100_v-0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.100_v-0.300.json"
+  },
+  {
+    "geometry": "HN_u+0.100_v-0.200",
+    "coupler_point": [
+      0.10000000000000009,
+      -0.19999999999999996
+    ],
+    "precision_fit_error": 21.825113640900422,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.100_v-0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.100_v-0.200.json"
+  },
+  {
+    "geometry": "HN_u+0.100_v-0.100",
+    "coupler_point": [
+      0.10000000000000009,
+      -0.09999999999999998
+    ],
+    "precision_fit_error": 20.992506496903143,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.100_v-0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.100_v-0.100.json"
+  },
+  {
+    "geometry": "HN_u+0.100_v+0.000",
+    "coupler_point": [
+      0.10000000000000009,
+      0.0
+    ],
+    "precision_fit_error": 20.219899352905863,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.100_v+0.000.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.100_v+0.000.json"
+  },
+  {
+    "geometry": "HN_u+0.100_v+0.100",
+    "coupler_point": [
+      0.10000000000000009,
+      0.10000000000000009
+    ],
+    "precision_fit_error": 19.507292208908574,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.100_v+0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.100_v+0.100.json"
+  },
+  {
+    "geometry": "HN_u+0.100_v+0.200",
+    "coupler_point": [
+      0.10000000000000009,
+      0.20000000000000007
+    ],
+    "precision_fit_error": 18.854685064911294,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.100_v+0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.100_v+0.200.json"
+  },
+  {
+    "geometry": "HN_u+0.100_v+0.300",
+    "coupler_point": [
+      0.10000000000000009,
+      0.30000000000000004
+    ],
+    "precision_fit_error": 18.26207792091401,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.100_v+0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.100_v+0.300.json"
+  },
+  {
+    "geometry": "HN_u+0.100_v+0.400",
+    "coupler_point": [
+      0.10000000000000009,
+      0.4
+    ],
+    "precision_fit_error": 17.72947077691673,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.100_v+0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.100_v+0.400.json"
+  },
+  {
+    "geometry": "HN_u+0.100_v+0.500",
+    "coupler_point": [
+      0.10000000000000009,
+      0.5
+    ],
+    "precision_fit_error": 17.256863632919448,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.100_v+0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.100_v+0.500.json"
+  },
+  {
+    "geometry": "HN_u+0.200_v-0.500",
+    "coupler_point": [
+      0.20000000000000007,
+      -0.5
+    ],
+    "precision_fit_error": 24.23911386742696,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.200_v-0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.200_v-0.500.json"
+  },
+  {
+    "geometry": "HN_u+0.200_v-0.400",
+    "coupler_point": [
+      0.20000000000000007,
+      -0.4
+    ],
+    "precision_fit_error": 23.226506723429676,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.200_v-0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.200_v-0.400.json"
+  },
+  {
+    "geometry": "HN_u+0.200_v-0.300",
+    "coupler_point": [
+      0.20000000000000007,
+      -0.3
+    ],
+    "precision_fit_error": 22.273899579432396,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.200_v-0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.200_v-0.300.json"
+  },
+  {
+    "geometry": "HN_u+0.200_v-0.200",
+    "coupler_point": [
+      0.20000000000000007,
+      -0.19999999999999996
+    ],
+    "precision_fit_error": 21.381292435435114,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.200_v-0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.200_v-0.200.json"
+  },
+  {
+    "geometry": "HN_u+0.200_v-0.100",
+    "coupler_point": [
+      0.20000000000000007,
+      -0.09999999999999998
+    ],
+    "precision_fit_error": 20.548685291437828,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.200_v-0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.200_v-0.100.json"
+  },
+  {
+    "geometry": "HN_u+0.200_v+0.000",
+    "coupler_point": [
+      0.20000000000000007,
+      0.0
+    ],
+    "precision_fit_error": 19.776078147440547,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.200_v+0.000.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.200_v+0.000.json"
+  },
+  {
+    "geometry": "HN_u+0.200_v+0.100",
+    "coupler_point": [
+      0.20000000000000007,
+      0.10000000000000009
+    ],
+    "precision_fit_error": 19.063471003443258,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.200_v+0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.200_v+0.100.json"
+  },
+  {
+    "geometry": "HN_u+0.200_v+0.200",
+    "coupler_point": [
+      0.20000000000000007,
+      0.20000000000000007
+    ],
+    "precision_fit_error": 18.41086385944598,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.200_v+0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.200_v+0.200.json"
+  },
+  {
+    "geometry": "HN_u+0.200_v+0.300",
+    "coupler_point": [
+      0.20000000000000007,
+      0.30000000000000004
+    ],
+    "precision_fit_error": 17.818256715448697,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.200_v+0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.200_v+0.300.json"
+  },
+  {
+    "geometry": "HN_u+0.200_v+0.400",
+    "coupler_point": [
+      0.20000000000000007,
+      0.4
+    ],
+    "precision_fit_error": 17.285649571451415,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.200_v+0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.200_v+0.400.json"
+  },
+  {
+    "geometry": "HN_u+0.200_v+0.500",
+    "coupler_point": [
+      0.20000000000000007,
+      0.5
+    ],
+    "precision_fit_error": 16.813042427454132,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.200_v+0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.200_v+0.500.json"
+  },
+  {
+    "geometry": "HN_u+0.300_v-0.500",
+    "coupler_point": [
+      0.30000000000000004,
+      -0.5
+    ],
+    "precision_fit_error": 23.855292661961645,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.300_v-0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.300_v-0.500.json"
+  },
+  {
+    "geometry": "HN_u+0.300_v-0.400",
+    "coupler_point": [
+      0.30000000000000004,
+      -0.4
+    ],
+    "precision_fit_error": 22.842685517964362,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.300_v-0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.300_v-0.400.json"
+  },
+  {
+    "geometry": "HN_u+0.300_v-0.300",
+    "coupler_point": [
+      0.30000000000000004,
+      -0.3
+    ],
+    "precision_fit_error": 21.89007837396708,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.300_v-0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.300_v-0.300.json"
+  },
+  {
+    "geometry": "HN_u+0.300_v-0.200",
+    "coupler_point": [
+      0.30000000000000004,
+      -0.19999999999999996
+    ],
+    "precision_fit_error": 20.997471229969793,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.300_v-0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.300_v-0.200.json"
+  },
+  {
+    "geometry": "HN_u+0.300_v-0.100",
+    "coupler_point": [
+      0.30000000000000004,
+      -0.09999999999999998
+    ],
+    "precision_fit_error": 20.16486408597251,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.300_v-0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.300_v-0.100.json"
+  },
+  {
+    "geometry": "HN_u+0.300_v+0.000",
+    "coupler_point": [
+      0.30000000000000004,
+      0.0
+    ],
+    "precision_fit_error": 19.39225694197523,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.300_v+0.000.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.300_v+0.000.json"
+  },
+  {
+    "geometry": "HN_u+0.300_v+0.100",
+    "coupler_point": [
+      0.30000000000000004,
+      0.10000000000000009
+    ],
+    "precision_fit_error": 18.679649797977948,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.300_v+0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.300_v+0.100.json"
+  },
+  {
+    "geometry": "HN_u+0.300_v+0.200",
+    "coupler_point": [
+      0.30000000000000004,
+      0.20000000000000007
+    ],
+    "precision_fit_error": 18.027042653980665,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.300_v+0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.300_v+0.200.json"
+  },
+  {
+    "geometry": "HN_u+0.300_v+0.300",
+    "coupler_point": [
+      0.30000000000000004,
+      0.30000000000000004
+    ],
+    "precision_fit_error": 17.43443550998338,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.300_v+0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.300_v+0.300.json"
+  },
+  {
+    "geometry": "HN_u+0.300_v+0.400",
+    "coupler_point": [
+      0.30000000000000004,
+      0.4
+    ],
+    "precision_fit_error": 16.9018283659861,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.300_v+0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.300_v+0.400.json"
+  },
+  {
+    "geometry": "HN_u+0.300_v+0.500",
+    "coupler_point": [
+      0.30000000000000004,
+      0.5
+    ],
+    "precision_fit_error": 16.429221221988815,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.300_v+0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.300_v+0.500.json"
+  },
+  {
+    "geometry": "HN_u+0.400_v-0.500",
+    "coupler_point": [
+      0.4,
+      -0.5
+    ],
+    "precision_fit_error": 23.53147145649633,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.400_v-0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.400_v-0.500.json"
+  },
+  {
+    "geometry": "HN_u+0.400_v-0.400",
+    "coupler_point": [
+      0.4,
+      -0.4
+    ],
+    "precision_fit_error": 22.51886431249904,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.400_v-0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.400_v-0.400.json"
+  },
+  {
+    "geometry": "HN_u+0.400_v-0.300",
+    "coupler_point": [
+      0.4,
+      -0.3
+    ],
+    "precision_fit_error": 21.566257168501764,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.400_v-0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.400_v-0.300.json"
+  },
+  {
+    "geometry": "HN_u+0.400_v-0.200",
+    "coupler_point": [
+      0.4,
+      -0.19999999999999996
+    ],
+    "precision_fit_error": 20.67365002450448,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.400_v-0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.400_v-0.200.json"
+  },
+  {
+    "geometry": "HN_u+0.400_v-0.100",
+    "coupler_point": [
+      0.4,
+      -0.09999999999999998
+    ],
+    "precision_fit_error": 19.841042880507196,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.400_v-0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.400_v-0.100.json"
+  },
+  {
+    "geometry": "HN_u+0.400_v+0.000",
+    "coupler_point": [
+      0.4,
+      0.0
+    ],
+    "precision_fit_error": 19.068435736509915,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.400_v+0.000.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.400_v+0.000.json"
+  },
+  {
+    "geometry": "HN_u+0.400_v+0.100",
+    "coupler_point": [
+      0.4,
+      0.10000000000000009
+    ],
+    "precision_fit_error": 18.35582859251263,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.400_v+0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.400_v+0.100.json"
+  },
+  {
+    "geometry": "HN_u+0.400_v+0.200",
+    "coupler_point": [
+      0.4,
+      0.20000000000000007
+    ],
+    "precision_fit_error": 17.70322144851535,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.400_v+0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.400_v+0.200.json"
+  },
+  {
+    "geometry": "HN_u+0.400_v+0.300",
+    "coupler_point": [
+      0.4,
+      0.30000000000000004
+    ],
+    "precision_fit_error": 17.110614304518066,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.400_v+0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.400_v+0.300.json"
+  },
+  {
+    "geometry": "HN_u+0.400_v+0.400",
+    "coupler_point": [
+      0.4,
+      0.4
+    ],
+    "precision_fit_error": 16.578007160520784,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.400_v+0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.400_v+0.400.json"
+  },
+  {
+    "geometry": "HN_u+0.400_v+0.500",
+    "coupler_point": [
+      0.4,
+      0.5
+    ],
+    "precision_fit_error": 16.105400016523497,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.400_v+0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.400_v+0.500.json"
+  },
+  {
+    "geometry": "HN_u+0.500_v-0.500",
+    "coupler_point": [
+      0.5,
+      -0.5
+    ],
+    "precision_fit_error": 23.26765025103101,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.500_v-0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.500_v-0.500.json"
+  },
+  {
+    "geometry": "HN_u+0.500_v-0.400",
+    "coupler_point": [
+      0.5,
+      -0.4
+    ],
+    "precision_fit_error": 22.255043107033732,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.500_v-0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.500_v-0.400.json"
+  },
+  {
+    "geometry": "HN_u+0.500_v-0.300",
+    "coupler_point": [
+      0.5,
+      -0.3
+    ],
+    "precision_fit_error": 21.302435963036444,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.500_v-0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.500_v-0.300.json"
+  },
+  {
+    "geometry": "HN_u+0.500_v-0.200",
+    "coupler_point": [
+      0.5,
+      -0.19999999999999996
+    ],
+    "precision_fit_error": 20.409828819039163,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.500_v-0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.500_v-0.200.json"
+  },
+  {
+    "geometry": "HN_u+0.500_v-0.100",
+    "coupler_point": [
+      0.5,
+      -0.09999999999999998
+    ],
+    "precision_fit_error": 19.57722167504188,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.500_v-0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.500_v-0.100.json"
+  },
+  {
+    "geometry": "HN_u+0.500_v+0.000",
+    "coupler_point": [
+      0.5,
+      0.0
+    ],
+    "precision_fit_error": 18.8046145310446,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.500_v+0.000.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.500_v+0.000.json"
+  },
+  {
+    "geometry": "HN_u+0.500_v+0.100",
+    "coupler_point": [
+      0.5,
+      0.10000000000000009
+    ],
+    "precision_fit_error": 18.092007387047314,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.500_v+0.100.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.500_v+0.100.json"
+  },
+  {
+    "geometry": "HN_u+0.500_v+0.200",
+    "coupler_point": [
+      0.5,
+      0.20000000000000007
+    ],
+    "precision_fit_error": 17.43940024305003,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.500_v+0.200.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.500_v+0.200.json"
+  },
+  {
+    "geometry": "HN_u+0.500_v+0.300",
+    "coupler_point": [
+      0.5,
+      0.30000000000000004
+    ],
+    "precision_fit_error": 16.84679309905275,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.500_v+0.300.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.500_v+0.300.json"
+  },
+  {
+    "geometry": "HN_u+0.500_v+0.400",
+    "coupler_point": [
+      0.5,
+      0.4
+    ],
+    "precision_fit_error": 16.31418595505547,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.500_v+0.400.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.500_v+0.400.json"
+  },
+  {
+    "geometry": "HN_u+0.500_v+0.500",
+    "coupler_point": [
+      0.5,
+      0.5
+    ],
+    "precision_fit_error": 15.841578811058186,
+    "candidate_file": "results/linkage_candidates\\HN_u+0.500_v+0.500.json",
+    "motion_report_file": "results/motion_reports\\HN_u+0.500_v+0.500.json"
+  }
+]

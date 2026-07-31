@@ -19,9 +19,8 @@ def generate_trajectory_compat(a, b, c, d, coupler_local_pt, N=360):
     Convert that into the full signature:
         generate_trajectory(A_pt, D_pt, a, b, c, coupler_local_pt, N)
     """
-    A = np.array([A_x, A_y])
-    D = np.array([D_x, D_y])
-
+    A_pt = np.array([0.0, 0.0])
+    D_pt = np.array([d, 0.0])
     return generate_trajectory(A_pt, D_pt, a, b, c, coupler_local_pt, N)
 
 
