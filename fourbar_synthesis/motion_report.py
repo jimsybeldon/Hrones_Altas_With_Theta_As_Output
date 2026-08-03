@@ -58,15 +58,15 @@ def motion_classification_report(results, geometry_name):
             "mean_speed_step": continuity["mean_speed_step"],
 
              # full arrays
-            "C_step": continuity["C_step"],
-            "alpha_step": continuity["alpha_step"],
-            "speed_step": continuity["speed_step"],
+            "C_step": continuity.get("C_step"),
+            "alpha_step": continuity.get("alpha_step"),
+            "speed_step": continuity.get("speed_step"),
         },
 
         "trajectory": {
-            "C": results["trajectory"]["C"],
-            "alpha": results["trajectory"]["alpha"],
-            "speed": results["trajectory"]["speed"],
+            "C": results.get("trajectory", {}).get("C"),
+            "alpha": results.get("trajectory", {}).get("alpha"),
+            "speed": results.get("trajectory", {}).get("speed"),
         },
         
         "reentry_events": reentries,
