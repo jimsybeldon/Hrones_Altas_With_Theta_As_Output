@@ -4,9 +4,12 @@ import numpy as np
 from fourbar_synthesis.trajectory import fk_positions
 from fourbar_synthesis.closure import choose_by_continuity, compute_ground_pivot_D
 from fourbar_synthesis.stress_test import run_fk_stress_test
+from fourbar_synthesis.coupler_grid import generate_coupler_grid
 
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+
+
 
 # ----------------------------------------------------------------------
 # DESIGN INPUTS (PRECISION POINTS + DESIGN ANGLES) FROM /data
@@ -17,35 +20,6 @@ with open("data/precision_task.json") as f:
 
 PRECISION_POINTS = np.array(PRECISION_TASK["precision_points"])
 THETA_DESIGN = np.deg2rad(PRECISION_TASK["theta_deg"])
-
-# ----------------------------------------------------------------------
-# CORRECTED COUPLER-POINT GRID (MECHANISM-DEFINED)
-# ----------------------------------------------------------------------
-
-STEP = 0.5
-B_LOCAL = 0.0  # pivot B at local coordinate 0
-
-U_VALUES = [
-    B_LOCAL - 2*STEP,   # -1.0
-    B_LOCAL - 1*STEP,   # -0.5
-    B_LOCAL,            #  0.0
-    B_LOCAL + 1*STEP,   # +0.5
-    B_LOCAL + 2*STEP,   # +1.0
-    B_LOCAL + 3*STEP,   # +1.5
-    B_LOCAL + 4*STEP,   # +2.0
-    B_LOCAL + 5*STEP,   # +2.5
-]
-
-V_VALUES = [
-    -2*STEP,      # -1.0
-    -1*STEP,      # -0.5
-    0.0,          #  0.0
-    +1*STEP,      # +0.5
-    +2*STEP,      # +1.0
-]
-
-def generate_coupler_grid():
-    return [(u, v) for u in U_VALUES for v in V_VALUES]
 
 
 # ----------------------------------------------------------------------
@@ -194,7 +168,6 @@ def coupler_point_path(a, b, c, AD, u, v, cycles=1, steps_per_cycle=720, seed_in
 # ----------------------------------------------------------------------
 
 def generate_multi_seed_atlas():
-    coupler_grid = generate_coupler_grid()
     global_candidates = []
 
     pp_mode = int(input("Enter precision-point mode (2 or 3): "))
@@ -203,6 +176,14 @@ def generate_multi_seed_atlas():
         pp_mode = 3
 
     for seed_idx, (a, b, c, AD) in enumerate(SEED_LINKAGES):
+
+        # Generate coupler grid using link length 'a'
+        coupler_grid = generate_coupler_grid(a)
+
+        # Optional debug
+        # print("[DEBUG] Coupler grid size =", len(coupler_grid))
+        # print("[DEBUG] First few points:", coupler_grid[:10])
+
         A = np.array([0.0, 0.0])
 
         try:
@@ -240,6 +221,7 @@ def generate_multi_seed_atlas():
             })
 
         global_candidates.extend(candidates)
+
 
     # ------------------------------------------------------------
     # GLOBAL TOP‑10 ACROSS ALL SEEDS
