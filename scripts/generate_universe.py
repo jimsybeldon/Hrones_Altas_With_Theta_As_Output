@@ -1,3 +1,5 @@
+# generate_universe.py
+
 import json
 import numpy as np
 
@@ -196,6 +198,7 @@ def generate_multi_seed_atlas():
 
         print(f"\n=== {SEED_NAMES[seed_idx]} ({seed_idx+1}/{len(SEED_LINKAGES)}) ===")
         print(f"a={a}, b={b}, c={c}, AD={AD}")
+        print(f"  Ground Pivot D = ({D[0]:+.6f}, {D[1]:+.6f})")
 
         try:
             fk_results = run_fk_stress_test(A, D, a, b, c)
@@ -356,9 +359,9 @@ def precision_point_overlay_summary(a, b, c, AD, u, v,
         error_mag = np.linalg.norm(P - P_target)
 
         print(f"   {idx:2d}   {theta_star:9.4f}   "
-              f"({P_target[0]:+.3f},{P_target[1]:+.3f})   "
-              f"({P[0]:+.3f},{P[1]:+.3f})   "
-              f"{error_mag:8.4f}")
+              f"({P_target[0]:+.5f},{P_target[1]:+.5f})   "
+              f"({P[0]:+.5f},{P[1]:+.5f})   "
+              f"{error_mag:8.6f}")
 
     print("  -----------------------------------------------------------\n")
 
