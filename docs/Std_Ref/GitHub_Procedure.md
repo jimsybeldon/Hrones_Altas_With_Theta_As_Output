@@ -1,3 +1,5 @@
+# [Git CLI and More](https://git-scm.com/book/en/v2/Getting-Started-The-Command-Line)
+
 Moving your SolidWorks BOM project from a local folder to a new GitHub repository is a great way to manage versions, especially as your Python scripts for ERP integration become more complex.
 
 Since you are using **VS Code**, you can handle most of this through the integrated terminal or the Source Control GUI. Here is the workflow to get your "Solidworks Bom Print Project" live on GitHub.

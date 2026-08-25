@@ -1,10 +1,11 @@
 # generate_universe.py
 
+import json
+
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import numpy as np
 
-from fourbar_synthesis.Import_Atlas_Date import import_atlas
 from fourbar_synthesis.Import_PPt_Data import import_PPt
 from fourbar_synthesis.closure import compute_ground_pivot_D
 from fourbar_synthesis.coupler_grid import generate_coupler_grid
@@ -19,13 +20,27 @@ from fourbar_synthesis.trajectory import fk_positions
 
 PRECISION_POINTS, THETA_DESIGN = import_PPt()
 
+
 # ----------------------------------------------------------------------
 # SEED LINKAGES FROM atlas_seeds.json
 # Each seed: (a, b, c, AD)
 # ----------------------------------------------------------------------
 
+def import_atlas():
+    global f, SEED_LINKAGES, SEED_NAMES
+    with open("data/atlas_seeds.json") as f:
+        atlas_data = json.load(f)
 
-SEED_LINKAGES, SEED_NAMES = import_atlas()
+    SEED_LINKAGES = [
+        (entry["a"], entry["b"], entry["c"], entry["AD"])
+        for entry in atlas_data
+    ]
+
+    SEED_NAMES = [entry["name"] for entry in atlas_data]
+
+
+import_atlas()
+
 
 # ----------------------------------------------------------------------
 # PRECISION ERROR FOR A GIVEN SEED + COUPLER POINT
