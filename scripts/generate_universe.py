@@ -24,7 +24,6 @@ PRECISION_POINTS, THETA_DESIGN = import_PPt()
 # Each seed: (a, b, c, AD)
 # ----------------------------------------------------------------------
 
-
 SEED_LINKAGES, SEED_NAMES = import_atlas()
 
 # ----------------------------------------------------------------------
