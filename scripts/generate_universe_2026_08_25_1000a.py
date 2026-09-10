@@ -4,7 +4,7 @@ import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import numpy as np
 
-from fourbar_synthesis.Import_Atlas_Date import import_atlas
+from fourbar_synthesis.Import_Atlas_Data import import_atlas
 from fourbar_synthesis.Import_PPt_Data import import_PPt
 from fourbar_synthesis.closure import compute_ground_pivot_D
 from fourbar_synthesis.coupler_grid import generate_coupler_grid
