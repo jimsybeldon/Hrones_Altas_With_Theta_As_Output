@@ -15,26 +15,24 @@ This roadmap is divided into **six layers**, each representing a coherent refact
 ### **Goal:** Ensure every linkage is solved in a single, explicit, reproducible coordinate frame.
 
 ### **Problems Identified**
-- Python uses **A–B–C collinear on +x axis**.
-- CAD used **perpendicular constraints**, creating a different frame.
-- Solver implicitly chooses the “lower” D intersection.
-- θ* is measured from horizontal in Python, but CAD may use a different zero.
+- Python uses **a=1 with b–c collinear and on +x axis**.
+- CAD used **perpendicular constraints**, creating a different frame.  **CAD must use b-c collinear and horizontal to match Python**
+- Solver implicitly chooses the “lower” D intersection.   **Upper AD pivot would be the mirror linkage which is the same but different frame of reference**
+- θ* is measured from horizontal in Python moving CCW, but CAD must do the same.
 
 ### **Refactor Actions**
 - Create a **Frame module** that explicitly defines:
   - A = (0, 0)
   - B = (a, 0)
   - C = (a + b, 0)
-  - D = computed intersection, with explicit choice:  
+  - AD = computed intersection, with explicit choice:  
     - **lower**  
     - **upper**
 - Add a flag:  
-  **frame_choice = "parallel" | "perpendicular" | "custom"**
+  **frame_choice = "parallel" | "perpendicular" | "custom"**  "this my be irrelevant and can be remove later"
 
 ### **Outcome**
 Every downstream module receives a deterministic frame.  
-No more CAD mismatch.  
-No more “shifted right by 0.25”.
 
 ---
 
@@ -44,21 +42,20 @@ No more “shifted right by 0.25”.
 
 ### **Problems Identified**
 - Python defines coupler point in BC frame.
-- CAD initially mismatched u/v orientation.
 - No explicit documentation of coupler local axes.
 
 ### **Refactor Actions**
 - Create a **CouplerFrame module**:
   - Origin = B
-  - x-axis = unit(B→C)
-  - y-axis = perpendicular
+  - x-axis = unit(b→c)
+  - y-axis = perpendicular to b→c and upward in initial when at initial position
 - Coupler point defined as:
   \[
   P = B + u\hat{BC} + v\hat{n}
   \]
 
 - Add explicit orientation flag:
-  **coupler_orientation = "right-hand" | "left-hand"**
+  **coupler_orientation = "right-hand" | "left-hand"** "may be irrelevant and can be removed later"
 
 ### **Outcome**
 Coupler point motion matches Python and CAD exactly.  
@@ -71,7 +68,7 @@ Precision point overlays become reproducible.
 ### **Goal:** Make precision point evaluation deterministic and CAD‑ready.
 
 ### **Problems Identified**
-- Precision points matched Python but CAD motion didn’t.
+- Precision points matched Python and CAD motion must match that as well.
 - θ* application differed between environments.
 - No explicit motion packet.
 
@@ -92,7 +89,7 @@ Precision point overlays become reproducible.
     "A": [0,0],
     "B": [a,0],
     "C": [a+b,0],
-    "D": [Dx, Dy],
+    "AD": [Dx, Dy],
     "coupler_local": {"u": u, "v": v},
     "theta_star": [...],
     "rotation": "CCW",

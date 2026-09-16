@@ -24,6 +24,7 @@ PRECISION_POINTS, THETA_DESIGN = import_PPt()
 # Each seed: (a, b, c, AD)
 # ----------------------------------------------------------------------
 
+
 SEED_LINKAGES, SEED_NAMES = import_atlas()
 
 # ----------------------------------------------------------------------
@@ -410,6 +411,7 @@ def animate_coupler_path(a, b, c, AD, u, v,
     )
 
     plt.show()
+
 
 # ----------------------------------------------------------------------
 # ANIMATION: FULL LINKAGE GEOMETRY (A-B-C-D + Coupler Point)

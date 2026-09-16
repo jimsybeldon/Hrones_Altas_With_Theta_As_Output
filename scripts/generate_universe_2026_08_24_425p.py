@@ -1,51 +1,24 @@
+# generate_universe.py
+
 import json
+
+import matplotlib.animation as animation
+import matplotlib.pyplot as plt
 import numpy as np
 
-from fourbar_synthesis.trajectory import fk_positions
-from fourbar_synthesis.closure import choose_by_continuity, compute_ground_pivot_D
+from fourbar_synthesis.Import_PPt_Data import import_PPt
+from fourbar_synthesis.closure import compute_ground_pivot_D
+from fourbar_synthesis.coupler_grid import generate_coupler_grid
+from fourbar_synthesis.pipeline import SynthesisPipeline
 from fourbar_synthesis.stress_test import run_fk_stress_test
-
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+from fourbar_synthesis.trajectory import fk_positions
 
 # ----------------------------------------------------------------------
 # DESIGN INPUTS (PRECISION POINTS + DESIGN ANGLES) FROM /data
 # ----------------------------------------------------------------------
 
-with open("data/precision_task.json") as f:
-    PRECISION_TASK = json.load(f)
 
-PRECISION_POINTS = np.array(PRECISION_TASK["precision_points"])
-THETA_DESIGN = np.deg2rad(PRECISION_TASK["theta_deg"])
-
-# ----------------------------------------------------------------------
-# CORRECTED COUPLER-POINT GRID (MECHANISM-DEFINED)
-# ----------------------------------------------------------------------
-
-STEP = 0.5
-B_LOCAL = 0.0  # pivot B at local coordinate 0
-
-U_VALUES = [
-    B_LOCAL - 2*STEP,   # -1.0
-    B_LOCAL - 1*STEP,   # -0.5
-    B_LOCAL,            #  0.0
-    B_LOCAL + 1*STEP,   # +0.5
-    B_LOCAL + 2*STEP,   # +1.0
-    B_LOCAL + 3*STEP,   # +1.5
-    B_LOCAL + 4*STEP,   # +2.0
-    B_LOCAL + 5*STEP,   # +2.5
-]
-
-V_VALUES = [
-    -2*STEP,      # -1.0
-    -1*STEP,      # -0.5
-    0.0,          #  0.0
-    +1*STEP,      # +0.5
-    +2*STEP,      # +1.0
-]
-
-def generate_coupler_grid():
-    return [(u, v) for u in U_VALUES for v in V_VALUES]
+PRECISION_POINTS, THETA_DESIGN = import_PPt()
 
 
 # ----------------------------------------------------------------------
@@ -53,78 +26,27 @@ def generate_coupler_grid():
 # Each seed: (a, b, c, AD)
 # ----------------------------------------------------------------------
 
-with open("data/atlas_seeds.json") as f:
-    atlas_data = json.load(f)
+def import_atlas():
+    global f, SEED_LINKAGES, SEED_NAMES
+    with open("data/atlas_seeds.json") as f:
+        atlas_data = json.load(f)
 
-SEED_LINKAGES = [
-    (entry["a"], entry["b"], entry["c"], entry["AD"])
-    for entry in atlas_data
-]
+    SEED_LINKAGES = [
+        (entry["a"], entry["b"], entry["c"], entry["AD"])
+        for entry in atlas_data
+    ]
 
-SEED_NAMES = [entry["name"] for entry in atlas_data]
+    SEED_NAMES = [entry["name"] for entry in atlas_data]
+
+
+import_atlas()
 
 
 # ----------------------------------------------------------------------
 # PRECISION ERROR FOR A GIVEN SEED + COUPLER POINT
 # ----------------------------------------------------------------------
 
-def precision_fit_error_for_seed(a, b, c, AD, coupler_uv, pp_mode=3):
-    """
-    NEW VERSION — θ-inference regression engine with PP-mode selection.
 
-    pp_mode:
-        3 → use all three precision points (default)
-        2 → use only precision point #1 and #3
-    """
-
-    A = np.array([0.0, 0.0])
-    D = compute_ground_pivot_D(A, a, b, c, AD)
-
-    u, v = coupler_uv
-    cp_local = np.array([u, v])
-
-    # ------------------------------------------------------------
-    # 1. Compute full coupler path
-    # ------------------------------------------------------------
-    try:
-        thetas, P_arr = coupler_point_path(a, b, c, AD, u, v)
-    except Exception:
-        return 1e9, []
-
-    # ------------------------------------------------------------
-    # 2. Select precision points based on pp_mode
-    # ------------------------------------------------------------
-    if pp_mode == 2:
-        # Use PP1 and PP3 explicitly by index
-        selected_precision_points = [PRECISION_POINTS[0], PRECISION_POINTS[2]]
-    else:
-        selected_precision_points = PRECISION_POINTS
-
-    # ------------------------------------------------------------
-    # 3. For each precision point, find best theta
-    # ------------------------------------------------------------
-    precision_fit_details = []
-    total_error = 0.0
-
-    for Pi in selected_precision_points:
-        diffs = P_arr - Pi
-        sq_err = np.sum(diffs * diffs, axis=1)
-
-        k_star = np.argmin(sq_err)
-        theta_star = thetas[k_star]
-        P_star = P_arr[k_star]
-        error_star = float(sq_err[k_star])
-
-        total_error += error_star
-
-        precision_fit_details.append({
-            "precision_point": [float(Pi[0]), float(Pi[1])],
-            "theta_star": float(theta_star),
-            "coupler_point_at_theta": [float(P_star[0]), float(P_star[1])],
-            "error": error_star
-        })
-
-    return total_error, precision_fit_details
 
 
 # ----------------------------------------------------------------------
@@ -132,8 +54,8 @@ def precision_fit_error_for_seed(a, b, c, AD, coupler_uv, pp_mode=3):
 # ----------------------------------------------------------------------
 
 def coupler_point_path(a, b, c, AD, u, v, cycles=1, steps_per_cycle=720, seed_index=None):
-    A = np.array([0.0, 0.0])
-    D = compute_ground_pivot_D(A, a, b, c, AD)
+    from fourbar_synthesis.frame import construct_frame
+    A, B, C, D = construct_frame(a, b, c, AD)
 
     N = cycles * steps_per_cycle
     thetas = np.linspace(0.0, 2.0*np.pi*cycles, N)
@@ -161,30 +83,23 @@ def coupler_point_path(a, b, c, AD, u, v, cycles=1, steps_per_cycle=720, seed_in
                    [np.sin(phi0),  np.cos(phi0)]])
     P_arr[0] = B0 + R0 @ cp_local
 
+    from fourbar_synthesis.fk_engine import fk_step
+
     # march
     for k in range(1, N):
         th = thetas[k]
-        B_k, C_candidates = fk_positions(th, A, D, a, b, c)
 
-        if not C_candidates:
+        B_k, C_k, P_k, C_prev = fk_step(a, b, c, AD, u, v, th, C_prev)
+
+        if C_k is None:
             B_arr[k] = B_arr[k-1]
             C_arr[k] = C_arr[k-1]
             P_arr[k] = P_arr[k-1]
             continue
 
-        C_k = choose_by_continuity(C_prev, C_candidates)
-
         B_arr[k] = B_k
         C_arr[k] = C_k
-
-        dx = C_k[0] - B_k[0]
-        dy = C_k[1] - B_k[1]
-        phi = np.arctan2(dy, dx)
-        R = np.array([[np.cos(phi), -np.sin(phi)],
-                      [np.sin(phi),  np.cos(phi)]])
-        P_arr[k] = B_k + R @ cp_local
-
-        C_prev = C_k
+        P_arr[k] = P_k# march
 
     return thetas, P_arr
 
@@ -194,7 +109,6 @@ def coupler_point_path(a, b, c, AD, u, v, cycles=1, steps_per_cycle=720, seed_in
 # ----------------------------------------------------------------------
 
 def generate_multi_seed_atlas():
-    coupler_grid = generate_coupler_grid()
     global_candidates = []
 
     pp_mode = int(input("Enter precision-point mode (2 or 3): "))
@@ -203,7 +117,16 @@ def generate_multi_seed_atlas():
         pp_mode = 3
 
     for seed_idx, (a, b, c, AD) in enumerate(SEED_LINKAGES):
-        A = np.array([0.0, 0.0])
+
+        # Generate coupler grid using link length 'a'
+        coupler_grid = generate_coupler_grid(a)
+
+        # Optional debug
+        # print("[DEBUG] Coupler grid size =", len(coupler_grid))
+        # print("[DEBUG] First few points:", coupler_grid[:10])
+
+        from fourbar_synthesis.frame import construct_frame
+        A, B, C, D = construct_frame(a, b, c, AD)
 
         try:
             D = compute_ground_pivot_D(A, a, b, c, AD)
@@ -215,6 +138,7 @@ def generate_multi_seed_atlas():
 
         print(f"\n=== {SEED_NAMES[seed_idx]} ({seed_idx+1}/{len(SEED_LINKAGES)}) ===")
         print(f"a={a}, b={b}, c={c}, AD={AD}")
+        print(f"  Ground Pivot D = ({D[0]:+.6f}, {D[1]:+.6f})")
 
         try:
             fk_results = run_fk_stress_test(A, D, a, b, c)
@@ -227,7 +151,10 @@ def generate_multi_seed_atlas():
 
         candidates = []
         for (u, v) in coupler_grid:
-            err, details = precision_fit_error_for_seed(a, b, c, AD, (u, v), pp_mode=pp_mode)
+            pipeline = SynthesisPipeline(a, b, c, AD, u, v)
+            err, details = pipeline.evaluate_precision(PRECISION_POINTS, pp_mode)
+
+
             candidates.append({
                 "seed_index": seed_idx,
                 "seed_linkage": (a, b, c, AD),
@@ -240,6 +167,7 @@ def generate_multi_seed_atlas():
             })
 
         global_candidates.extend(candidates)
+
 
     # ------------------------------------------------------------
     # GLOBAL TOP‑10 ACROSS ALL SEEDS
@@ -261,6 +189,30 @@ def generate_multi_seed_atlas():
         print(f"  Coupler Point: u={u:+.3f}, v={v:+.3f}")
         print(f"  Total Error: {err:.6f}")
         print("  Precision‑Point Diagnostics:")
+
+        # ------------------------------------------------------------
+        # CAD EXPORT FOR THIS TOP-10 CANDIDATE
+        # ------------------------------------------------------------
+        pipeline = SynthesisPipeline(a, b, c, AD, u, v)
+
+        # Generate full coupler path
+        A, B, C, D, thetas, P_arr = pipeline.generate_coupler_path()
+
+
+        output_path = (
+            f"results/motion_reports/"
+            f"{SEED_NAMES[seed_idx]}_rank{rank}_cad_packet.json"
+        )
+
+        pipeline.export_cad_packet(
+            thetas,
+            P_arr,
+            cand["precision_fit_details"],
+            output_path
+        )
+
+        print(f"  CAD packet written: {output_path}")
+
 
         for i, d in enumerate(details, start=1):
             print(f"    Precision Point #{i}: {d['precision_point']}")
@@ -298,11 +250,32 @@ def generate_multi_seed_atlas():
     a, b, c, AD = best["seed_linkage"]
     u, v = best["coupler_point"]
 
-    precision_point_overlay_summary(
-        a, b, c, AD, u, v,
-        precision_fit_details=best["precision_fit_details"],
-        seed_index=seed_idx
+# ----------------------------------------------------------------------
+# CAD EXPORT FOR BEST LINKAGE
+# ----------------------------------------------------------------------
+
+    pipeline = SynthesisPipeline(a, b, c, AD, u, v)
+    A, B, C, D, thetas, P_arr = pipeline.generate_coupler_path()
+
+    output_path = f"results/motion_reports/{SEED_NAMES[seed_idx]}_cad_packet.json"
+
+    pipeline.export_cad_packet(
+        thetas,
+        P_arr,
+        best["precision_fit_details"],
+        output_path
     )
+
+    print(f"\nCAD motion packet written to: {output_path}")
+
+
+    from fourbar_synthesis.precision_overlay import print_precision_overlay
+    print_precision_overlay(
+        a, b, c, AD, u, v,
+        best["precision_fit_details"],
+        seed_name=SEED_NAMES[seed_idx]
+    )
+
 
     plot_coupler_path_with_precision(
         a, b, c, AD, u, v,
@@ -329,57 +302,6 @@ def generate_multi_seed_atlas():
 # PRECISION-POINT OVERLAY SUMMARY (COMPACT, HUMAN-VERIFIABLE)
 # ----------------------------------------------------------------------
 
-def precision_point_overlay_summary(a, b, c, AD, u, v,
-                                    precision_fit_details,
-                                    seed_index=None):
-
-    A = np.array([0.0, 0.0])
-    D = compute_ground_pivot_D(A, a, b, c, AD)
-    cp_local = np.array([u, v])
-
-    print("\nPrecision‑Point Overlay Summary:")
-    if seed_index is not None:
-        print(f"  {SEED_NAMES[seed_index]}")
-    print(f"  Coupler point (u={u:+.3f}, v={v:+.3f})")
-    print(f"  Linkage a={a}, b={b}, c={c}, AD={AD}")
-    print("  -----------------------------------------------------------")
-    print("   idx   theta*(rad)     Target(x,y)        Actual(x,y)     |Error|")
-    print("  -----------------------------------------------------------")
-
-    C_prev = None
-
-    for idx, d in enumerate(precision_fit_details, start=1):
-        theta_star = d["theta_star"]
-        P_target = np.array(d["precision_point"])
-
-        B, C_candidates = fk_positions(theta_star, A, D, a, b, c)
-
-        if not C_candidates:
-            print(f"   {idx:2d}   {theta_star:9.4f}   NO CLOSURE")
-            continue
-
-        C = C_candidates[0] if C_prev is None else choose_by_continuity(C_prev, C_candidates)
-        C_prev = C
-
-        dx = C[0] - B[0]
-        dy = C[1] - B[1]
-        phi = np.arctan2(dy, dx)
-
-        R = np.array([
-            [np.cos(phi), -np.sin(phi)],
-            [np.sin(phi),  np.cos(phi)],
-        ])
-
-        P = B + R @ cp_local
-        error_mag = np.linalg.norm(P - P_target)
-
-        print(f"   {idx:2d}   {theta_star:9.4f}   "
-              f"({P_target[0]:+.3f},{P_target[1]:+.3f})   "
-              f"({P[0]:+.3f},{P[1]:+.3f})   "
-              f"{error_mag:8.4f}")
-
-    print("  -----------------------------------------------------------\n")
-
 
 
 # ----------------------------------------------------------------------
@@ -390,8 +312,8 @@ def plot_coupler_path_with_precision(a, b, c, AD, u, v,
                                      precision_fit_details,
                                      seed_index=None):
 
-    A = np.array([0.0, 0.0])
-    D = compute_ground_pivot_D(A, a, b, c, AD)
+    from fourbar_synthesis.frame import construct_frame
+    A, B, C, D = construct_frame(a, b, c, AD)
 
     thetas, P = coupler_point_path(a, b, c, AD, u, v)
 
@@ -430,7 +352,6 @@ def plot_coupler_path_with_precision(a, b, c, AD, u, v,
     ax.grid(True)
     ax.legend()
     plt.show()
-
 
 # ----------------------------------------------------------------------
 # ANIMATION: COUPLER POINT MOTION
@@ -516,8 +437,9 @@ def animate_full_linkage(a, b, c, AD, u, v,
                          cycles=1, steps_per_cycle=720,
                          seed_index=None):
 
-    A = np.array([0.0, 0.0])
-    D = compute_ground_pivot_D(A, a, b, c, AD)
+    from fourbar_synthesis.frame import construct_frame
+
+    A, B, C, D = construct_frame(a, b, c, AD)
 
     cp_local = np.array([u, v])
 
@@ -539,19 +461,23 @@ def animate_full_linkage(a, b, c, AD, u, v,
       len(precision_fit_details))
 
 
+    from fourbar_synthesis.fk_engine import fk_step
+
+    # March
+
     for k in range(1, N):
         th = thetas[k]
-        B_k, C_candidates = fk_positions(th, A, D, a, b, c)
 
-        if not C_candidates:
+        B_k, C_k, P_k, C_prev = fk_step(a, b, c, AD, u, v, th, C_prev)
+
+        if C_k is None:
             B_arr[k] = B_arr[k-1]
             C_arr[k] = C_arr[k-1]
             continue
 
-        C_k = choose_by_continuity(C_prev, C_candidates)
         B_arr[k] = B_k
         C_arr[k] = C_k
-        C_prev = C_k
+
 
     fig, ax = plt.subplots(figsize=(8, 6))
 
